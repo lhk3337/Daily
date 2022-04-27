@@ -5,7 +5,12 @@ export interface IFdata {
   create_date: number;
   id: number;
 }
-export interface IDailyListprops {
-  Fdata: IFdata[];
+export interface onEvent {
   onDelClick: (id: number) => void;
+  onEditClick: (id: number, newContent: string) => void;
 }
+export interface IDailyListprops extends onEvent {
+  Fdata: IFdata[];
+}
+
+export interface IDailyItemProps extends IFdata, onEvent {}
