@@ -1,12 +1,8 @@
 import { IFdata } from "types";
 interface Iprops extends IFdata {
-  data: IFdata[];
-  setState: React.Dispatch<React.SetStateAction<IFdata[]>>;
+  onDelClick: (id: number) => void;
 }
-const DailyItem = ({ id, author, content, emotion, create_date, data, setState }: Iprops) => {
-  const onDelClick = (id: number) => {
-    setState(data.filter((item: IFdata) => item.id !== id));
-  };
+const DailyItem = ({ id, author, content, emotion, create_date, onDelClick }: Iprops) => {
   return (
     <li className="DailyItem">
       <div className="info__container">

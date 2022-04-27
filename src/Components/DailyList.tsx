@@ -1,7 +1,7 @@
 import DailyItem from "./DailyItem";
 import { IDailyListprops, IFdata } from "types";
 
-const DailyList = ({ Fdata, setState }: IDailyListprops) => {
+const DailyList = ({ Fdata, onDelClick }: IDailyListprops) => {
   console.log(Fdata);
   // console.log(Fdata.filter((data: IFdata) => data.id === 0));
   return (
@@ -11,7 +11,7 @@ const DailyList = ({ Fdata, setState }: IDailyListprops) => {
         <h2>게시물 {Fdata.length}개</h2>
         <ul>
           {Fdata.map((data: IFdata) => (
-            <DailyItem key={data.id} {...data} data={Fdata} setState={setState} />
+            <DailyItem key={data.id} {...data} onDelClick={onDelClick} />
             /*
             <DailyItem
               id={data.id}

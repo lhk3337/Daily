@@ -20,10 +20,13 @@ function App() {
     dateId.current += 1;
     setState([newItem, ...state]);
   };
+  const onDelClick = (id: number) => {
+    setState(state.filter((item: IFdata) => item.id !== id));
+  };
   return (
     <div className="App">
       <DailyEditor createContent={createContent} />
-      <DailyList Fdata={state} setState={setState} />
+      <DailyList Fdata={state} onDelClick={onDelClick} />
     </div>
   );
 }
