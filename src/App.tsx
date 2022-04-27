@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import DailyEditor from "Components/DailyEditor";
 import { IFdata } from "types";
-import "./App.css";
+import "styles/App.css";
 import DailyList from "Components/DailyList";
 
 function App() {
