@@ -12,16 +12,6 @@ const DailyList = ({ Fdata, onDelClick }: IDailyListprops) => {
         <ul>
           {Fdata.map((data: IFdata) => (
             <DailyItem key={data.id} {...data} onDelClick={onDelClick} />
-            /*
-            <DailyItem
-              id={data.id}
-              author={data.author}
-              content={data.content}
-              emotion={data.emotion}
-              create_date={data.create_date}
-            />
-            === <DailyItem {...data} />
-            */
           ))}
         </ul>
       </div>
