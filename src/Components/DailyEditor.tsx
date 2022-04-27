@@ -1,24 +1,17 @@
-import React, { useState, useRef } from "react";
-const DailyEditor = () => {
+import React, { useState, useRef, Dispatch, SetStateAction } from "react";
+import { IFdata } from "types";
+interface Iprops {
+  createContent: (author: string, content: string, emotion: number) => void;
+}
+const DailyEditor = ({ createContent }: Iprops) => {
   const [author, setAuthor] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [emotion, setEmotion] = useState<number>(1);
+
   const authorInput = useRef<HTMLInputElement>(null);
   const contentInput = useRef<HTMLTextAreaElement>(null);
-  type Tobj = {
-    author: string;
-    content: string;
-    emotion: number;
-  };
-
-  const obj: Tobj = {
-    author: author,
-    content: content,
-    emotion: emotion,
-  };
 
   const onSubmit = () => {
-    console.log(obj);
     if (author.length < 1) {
       if (authorInput.current !== null) {
         authorInput.current.focus();
@@ -31,6 +24,7 @@ const DailyEditor = () => {
       }
       return;
     }
+    createContent(author, content, emotion);
     setAuthor("");
     setContent("");
     alert("저장 되었습니다.");

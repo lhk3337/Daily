@@ -36,3 +36,38 @@ textarea {
   padding: 10px;
   cursor: pointer;
 }
+
+/* list */
+.DailyList {
+  border: 1px solid gray;
+  padding: 20px;
+  margin-top: 20px;
+}
+.DailyList ul {
+  margin: 0;
+  padding: 0;
+}
+.DailyList h2 {
+  text-align: center;
+}
+.DailyItem {
+  background-color: rgb(240, 240, 240);
+  margin-bottom: 10px;
+  list-style: none;
+  padding: 20px;
+}
+.DailyItem .info__container {
+  border-bottom: 1px solid gray;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.info__container .date {
+  color: gray;
+  font-weight: bold;
+  font-size: 12px;
+}
+.DailyItem .content {
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
