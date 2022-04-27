@@ -1,5 +1,5 @@
-import React, { useState, useRef, Dispatch, SetStateAction } from "react";
-import { IFdata } from "types";
+import React, { useState, useRef } from "react";
+
 interface Iprops {
   createContent: (author: string, content: string, emotion: number) => void;
 }
