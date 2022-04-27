@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface IFdata {
   author: string;
   content: string;
@@ -7,4 +9,5 @@ export interface IFdata {
 }
 export interface IDailyListprops {
   Fdata: IFdata[];
+  setState: React.Dispatch<React.SetStateAction<IFdata[]>>;
 }

@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <DailyEditor createContent={createContent} />
-      <DailyList Fdata={state} />
+      <DailyList Fdata={state} setState={setState} />
     </div>
   );
 }
