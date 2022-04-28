@@ -3,11 +3,11 @@ import DailyEditor from "Components/DailyEditor";
 import { IFdata } from "types";
 import "styles/App.css";
 import DailyList from "Components/DailyList";
+import LifeCycle from "LifeCycle";
 
 function App() {
   const [state, setState] = useState<IFdata[]>([]);
   const dateId = useRef(0);
-
   const createContent = (author: string, content: string, emotion: number) => {
     const create_date = new Date().getTime();
     const newItem: IFdata = {
@@ -30,6 +30,7 @@ function App() {
   };
   return (
     <div className="App">
+      <LifeCycle />
       <DailyEditor createContent={createContent} />
       <DailyList Fdata={state} onDelClick={onDelClick} onEditClick={onEditClick} />
     </div>
