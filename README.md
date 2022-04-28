@@ -41,3 +41,33 @@ const onEditClick = (id: number, newContent: string) => {
   // App의id와 DailyItem의 id가 같으면 content의 값을 DailyItem에서 수정한 값으로 교체 아니면 그대로 유지
 };
 ```
+
+### api 데이터 가져오기
+
+`App.tsx`에 getData 함수 선언
+
+- author: e.target.value(input) -> api.email
+- content : e.target.value(textarea) -> api.body
+
+```ts
+const getData = async () => {
+  try {
+    const response = await (await fetch(`https://jsonplaceholder.typicode.com/comments`)).json();
+    const initData = response.slice(0, 20).map((value: IapiData) => {
+      return {
+        author: value.email,
+        content: value.body,
+        emotion: Math.floor(Math.random() * 5) + 1,
+        create_date: new Date().getTime(),
+        id: dateId.current++,
+      };
+    });
+    setState(initData);
+  } catch (err) {
+    console.log(err);
+  }
+};
+useEffect(() => {
+  getData();
+}, []);
+```
