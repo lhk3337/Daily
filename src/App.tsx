@@ -1,13 +1,35 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import DailyEditor from "Components/DailyEditor";
-import { IFdata } from "types";
+import { IFdata, IapiData } from "types";
 import "styles/App.css";
 import DailyList from "Components/DailyList";
-import LifeCycle from "LifeCycle";
 
 function App() {
   const [state, setState] = useState<IFdata[]>([]);
+
   const dateId = useRef(0);
+
+  const getData = async () => {
+    try {
+      const response = await (await fetch(`https://jsonplaceholder.typicode.com/comments`)).json();
+      const initData = response.slice(0, 20).map((value: IapiData) => {
+        return {
+          author: value.email,
+          content: value.body,
+          emotion: Math.floor(Math.random() * 5) + 1,
+          create_date: new Date().getTime(),
+          id: dateId.current++,
+        };
+      });
+      setState(initData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   const createContent = (author: string, content: string, emotion: number) => {
     const create_date = new Date().getTime();
     const newItem: IFdata = {
@@ -30,7 +52,6 @@ function App() {
   };
   return (
     <div className="App">
-      <LifeCycle />
       <DailyEditor createContent={createContent} />
       <DailyList Fdata={state} onDelClick={onDelClick} onEditClick={onEditClick} />
     </div>

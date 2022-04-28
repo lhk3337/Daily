@@ -5,6 +5,11 @@ export interface IFdata {
   create_date: number;
   id: number;
 }
+
+export interface IapiData {
+  email: string;
+  body: string;
+}
 export interface onEvent {
   onDelClick: (id: number) => void;
   onEditClick: (id: number, newContent: string) => void;
