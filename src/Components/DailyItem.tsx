@@ -1,9 +1,11 @@
 import { IDailyItemProps } from "types";
-import { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const DailyItem = ({ id, author, content, emotion, create_date, onDelClick, onEditClick }: IDailyItemProps) => {
   const [isEdit, setIsEdit] = useState(true);
   const [editContent, setEditContent] = useState<string>(content);
+
+  useEffect(() => console.log(`${id}번 째 아이템 렌더!`));
 
   const editContentInput = useRef<HTMLTextAreaElement>(null);
   const onEditCancel = () => {
@@ -53,4 +55,9 @@ const DailyItem = ({ id, author, content, emotion, create_date, onDelClick, onEd
   );
 };
 
-export default DailyItem;
+export default React.memo(DailyItem);
+
+// React.memo
+// onDelClick, onEditClick을 최적화
+// 일기 리스트에서 최적화를 안했다면 리스트 하나 항목을 하나만 수정해도 모든 리스트가 리랜더링이 발생하지만
+// 최적화를 했으면 해당 항목만 리랜더링이 발생한다.

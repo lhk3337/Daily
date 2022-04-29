@@ -42,14 +42,18 @@ function App() {
     dateId.current += 1;
     setState((state) => [newItem, ...state]);
   }, []);
+  //함수를 최적화, e.target.value값이 state배열에 하나만 확인 <- useCallback(()=>{... setState([newItem, ...state]) },[])
 
-  const onDelClick = (id: number) => {
-    setState(state.filter((item: IFdata) => item.id !== id));
-  };
-  const onEditClick = (id: number, newContent: string) => {
-    setState(state.map((value: IFdata) => (value.id === id ? { ...value, content: newContent } : value)));
-    // App의id와 DailyItem의 id가 같으면 content의 값을 DailyItem에서 수정한 값으로 교체 아니면 그대로 유지
-  };
+  const onDelClick = useCallback((id: number) => {
+    setState((state): IFdata[] => state.filter((item: IFdata) => item.id !== id));
+  }, []);
+
+  const onEditClick = useCallback((id: number, newContent: string) => {
+    setState((state): IFdata[] =>
+      state.map((value: IFdata) => (value.id === id ? { ...value, content: newContent } : value))
+    );
+  }, []);
+  // App의id와 DailyItem의 id가 같으면 content의 값을 DailyItem에서 수정한 값으로 교체 아니면 그대로 유지
 
   const getDiaryAnalysis = useMemo(() => {
     const goodCount = state.filter((value) => value.emotion >= 3).length;
