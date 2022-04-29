@@ -1,9 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 interface Iprops {
   createContent: (author: string, content: string, emotion: number) => void;
 }
+
 const DailyEditor = ({ createContent }: Iprops) => {
+  useEffect(() => {
+    console.log("DiaryEditor 랜더");
+  });
+
   const [author, setAuthor] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [emotion, setEmotion] = useState<number>(1);
@@ -60,4 +65,4 @@ const DailyEditor = ({ createContent }: Iprops) => {
   );
 };
 
-export default DailyEditor;
+export default React.memo(DailyEditor);

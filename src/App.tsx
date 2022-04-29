@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import DailyEditor from "Components/DailyEditor";
 import { IFdata, IapiData } from "types";
 import "styles/App.css";
@@ -30,7 +30,7 @@ function App() {
     getData();
   }, []);
 
-  const createContent = (author: string, content: string, emotion: number) => {
+  const createContent = useCallback((author: string, content: string, emotion: number) => {
     const create_date = new Date().getTime();
     const newItem: IFdata = {
       author,
@@ -40,8 +40,8 @@ function App() {
       id: dateId.current,
     };
     dateId.current += 1;
-    setState([newItem, ...state]);
-  };
+    setState((state) => [newItem, ...state]);
+  }, []);
 
   const onDelClick = (id: number) => {
     setState(state.filter((item: IFdata) => item.id !== id));
