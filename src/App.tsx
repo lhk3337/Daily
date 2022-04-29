@@ -3,7 +3,6 @@ import DailyEditor from "Components/DailyEditor";
 import { IFdata, IapiData } from "types";
 import "styles/App.css";
 import DailyList from "Components/DailyList";
-import OptimizeTest from "OptimizeTest";
 
 function App() {
   const [state, setState] = useState<IFdata[]>([]);
@@ -64,7 +63,6 @@ function App() {
   // 그렇기 떄문에 getDiaryAnalysis에 useMemo를 선언하면 input에 입력해도 리 랜더링 되지 않고 리스트의 상태변화가 있을 시 리렌더링 됨
   return (
     <div className="App">
-      <OptimizeTest />
       <DailyEditor createContent={createContent} />
       <div>전체 일기 : {state.length}</div>
       <div>기분 좋은 일기 개수 : {goodCount}</div>
