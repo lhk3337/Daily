@@ -1,12 +1,39 @@
-import { useState, useRef, useEffect, useMemo, useCallback } from "react";
+import { useRef, useEffect, useMemo, useCallback, useReducer } from "react";
 import DailyEditor from "Components/DailyEditor";
 import { IFdata, IapiData } from "types";
 import "styles/App.css";
 import DailyList from "Components/DailyList";
 
-function App() {
-  const [state, setState] = useState<IFdata[]>([]);
+interface Action {
+  type?: string;
+  data?: IFdata;
+  id?: number;
+  newContent?: string;
+}
 
+const reducer = (state: IFdata[], action: Action): any => {
+  switch (action.type) {
+    case "INIT": {
+      return action.data;
+    }
+    case "CREATE":
+      const created_date = new Date().getTime();
+      const newitem = {
+        ...action.data,
+        created_date,
+      };
+      return [newitem, ...state];
+    case "DELETE":
+      return state.filter((item: IFdata) => item.id !== action.id);
+    case "EDIT":
+      return state.map((value: IFdata) => (value.id === action.id ? { ...value, content: action.newContent } : value));
+    default:
+      return state;
+  }
+};
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, []);
   const dateId = useRef(0);
 
   const getData = async () => {
@@ -21,7 +48,7 @@ function App() {
           id: dateId.current++,
         };
       });
-      setState(initData);
+      dispatch({ type: "INIT", data: initData });
     } catch (err) {
       console.log(err);
     }
@@ -32,31 +59,22 @@ function App() {
 
   const createContent = useCallback((author: string, content: string, emotion: number) => {
     const create_date = new Date().getTime();
-    const newItem: IFdata = {
-      author,
-      content,
-      emotion,
-      create_date,
-      id: dateId.current,
-    };
     dateId.current += 1;
-    setState((state) => [newItem, ...state]);
+    dispatch({ type: "CREATE", data: { author, content, emotion, create_date, id: dateId.current } });
   }, []);
   //함수를 최적화, e.target.value값이 state배열에 하나만 확인 <- useCallback(()=>{... setState([newItem, ...state]) },[])
 
   const onDelClick = useCallback((id: number) => {
-    setState((state): IFdata[] => state.filter((item: IFdata) => item.id !== id));
+    dispatch({ type: "DELETE", id });
   }, []);
 
   const onEditClick = useCallback((id: number, newContent: string) => {
-    setState((state): IFdata[] =>
-      state.map((value: IFdata) => (value.id === id ? { ...value, content: newContent } : value))
-    );
+    dispatch({ type: "EDIT", id, newContent });
   }, []);
   // App의id와 DailyItem의 id가 같으면 content의 값을 DailyItem에서 수정한 값으로 교체 아니면 그대로 유지
 
   const getDiaryAnalysis = useMemo(() => {
-    const goodCount = state.filter((value) => value.emotion >= 3).length;
+    const goodCount = state.filter((value: IFdata) => value.emotion >= 3).length;
     const badCount = state.length - goodCount;
     const goodRatio = (goodCount / state.length) * 100;
     return { goodCount, badCount, goodRatio };
