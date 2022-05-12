@@ -78,7 +78,7 @@ function App() {
     const badCount = state.length - goodCount;
     const goodRatio = (goodCount / state.length) * 100;
     return { goodCount, badCount, goodRatio };
-  }, [state.length]);
+  }, [state]);
 
   const { goodCount, badCount, goodRatio } = getDiaryAnalysis;
   //useMemo를 선언하지 않았으면 input에 입력하면 getDiaryAnalysis도 같이 리 랜더링
