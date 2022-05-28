@@ -24,9 +24,9 @@ const Header = () => {
               &lt;
             </button>
           </div>
-          <h1 className="w-1/2 text-2xl justify-center font-bold flex">{`${date.getFullYear()}년 ${
-            date.getMonth() + 1
-          }월`}</h1>
+          <h1 className="w-1/2 text-2xl justify-center font-bold flex">
+            {new Date(date).toLocaleDateString("ko-KR", { year: "numeric", month: "long" })}
+          </h1>
           <div className="w-3/12 justify-end flex">
             <button onClick={() => dispatch(plus())} className="px-5 py-2.5 bg-[#ececec] rounded whitespace-nowrap">
               &gt;
