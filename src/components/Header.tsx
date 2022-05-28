@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { plus, minus } from "store/modules/time";
 const Header = () => {
+  const dispatch = useDispatch();
+
   const location = useLocation();
   const Navi = useNavigate();
 
-  const [date, setDate] = useState<Date>(new Date());
-
-  const onLefthandleClick = () => {
-    setDate(new Date(date.getFullYear(), date.getMonth() - 1, date.getDate()));
-  };
-  const onRighthandleClick = () => {
-    setDate(new Date(date.getFullYear(), date.getMonth() + 1, date.getDate()));
-  };
+  const date = useSelector(({ time }: any) => time);
 
   return (
     <header className="flex py-5 border-b border-[#e2e2e2] items-center  w-full">
@@ -20,7 +17,7 @@ const Header = () => {
           <div className="w-3/12 justify-start flex">
             <button
               onClick={() => {
-                onLefthandleClick();
+                dispatch(minus());
               }}
               className="px-5 py-2.5 bg-[#ececec] rounded whitespace-nowrap"
             >
@@ -31,7 +28,7 @@ const Header = () => {
             date.getMonth() + 1
           }월`}</h1>
           <div className="w-3/12 justify-end flex">
-            <button onClick={() => onRighthandleClick()} className="px-5 py-2.5 bg-[#ececec] rounded whitespace-nowrap">
+            <button onClick={() => dispatch(plus())} className="px-5 py-2.5 bg-[#ececec] rounded whitespace-nowrap">
               &gt;
             </button>
           </div>
