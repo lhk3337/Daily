@@ -1,6 +1,6 @@
 const INIT = "INIT";
 const CREATE = "CREATE";
-const DELETE = "DELETE";
+const REMOVE = "REMOVE";
 const EDIT = "EDIT";
 
 type actionType = {
@@ -9,6 +9,10 @@ type actionType = {
   targetId: string;
   date: Date;
 };
+
+export const edit = () => ({ type: EDIT });
+export const remove = () => ({ type: REMOVE });
+export const create = () => ({ type: CREATE }); //액션 생성 함수
 
 const data = [
   { id: 0, content: "오늘의 일기 0번", emotion: 3, date: 1653656723014 },
@@ -26,13 +30,12 @@ export default function Diary(state: any = initialState, action: actionType) {
   let newState = [];
   switch (action.type) {
     case INIT:
-      return state;
+      return action.data;
     case CREATE: {
-      newState = [action.data, ...state];
+      newState = [action.data, ...state.data];
       break;
     }
-
-    case DELETE:
+    case REMOVE:
       newState = state.filter((it: any) => it.id !== action.targetId);
       break;
     case EDIT:
@@ -41,5 +44,6 @@ export default function Diary(state: any = initialState, action: actionType) {
     default:
       return state;
   }
+  console.log(newState);
   return newState;
 }
