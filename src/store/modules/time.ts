@@ -1,10 +1,12 @@
-const PLUS = "PLUS";
-const MINUS = "MINUS";
+const PLUS = "PLUS" as const;
+const MINUS = "MINUS" as const;
 
 export const plus = () => ({ type: PLUS });
 export const minus = () => ({ type: MINUS });
 
-export default function Diary(state: any = new Date(), action: any) {
+type timeAction = ReturnType<typeof plus> | ReturnType<typeof minus>;
+
+export default function Diary(state: any = new Date(), action: timeAction) {
   switch (action.type) {
     case PLUS:
       return new Date(state.getFullYear(), state.getMonth() + 1, state.getDate());

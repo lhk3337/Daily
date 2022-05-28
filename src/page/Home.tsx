@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { RootState } from "store/modules";
 const Home = () => {
   const navi = useNavigate();
+  const state = useSelector(({ diary }: RootState) => diary.data);
+  const times = useSelector(({ time }: RootState) => time);
 
-  const state = useSelector(({ diary }: any) => diary.data);
-
-  console.log(state);
+  useEffect(() => {});
 
   return (
     <div className="mt-[20px] mb-[30px]">
@@ -18,7 +19,12 @@ const Home = () => {
       </button>
       <ul>
         {state.map((item: any, idx: number) => (
-          <li key={idx}>{item.content}</li>
+          <li key={idx}>
+            <h1>{item.content}</h1>
+            <h2>
+              {new Date(item.date).toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" })}
+            </h2>
+          </li>
         ))}
       </ul>
     </div>
