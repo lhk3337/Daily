@@ -9,6 +9,7 @@ const dummyData = [
   { id: 2, content: "오늘의 일기 2번", emotion: 1, date: 1652656786274 },
   { id: 3, content: "오늘의 일기 3번", emotion: 4, date: 1652756799088 },
   { id: 4, content: "오늘의 일기 4번", emotion: 2, date: 1652856810527 },
+  { id: 5, content: "오늘의 일기 5번", emotion: 3, date: 1654242133171 },
 ];
 
 interface IdummyDataData {
