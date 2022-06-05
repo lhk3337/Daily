@@ -4,7 +4,7 @@ import New from "page/New";
 import Diary from "page/Diary";
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./Header";
+import Header from "components/Header/Header";
 const Routers = () => {
   return (
     <Router>
