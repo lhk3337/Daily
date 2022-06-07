@@ -28,10 +28,7 @@ const DiaryItem = ({ emotion, content, date, id }: Iprops) => {
         <h1 className="text-[18px]">{content}</h1>
       </div>
       <div>
-        <button
-          className="px-5 py-2 bg-[#ececec] text-[18px] rounded whitespace-nowrap"
-          onClick={() => navi(`/edit/${id}`)}
-        >
+        <button className="backBtn" onClick={() => navi(`/edit/${id}`)}>
           수정하기
         </button>
       </div>

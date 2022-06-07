@@ -1,5 +1,5 @@
 import React from "react";
-import DiaryList from "components/DiaryList";
+import DiaryList from "components/Home/DiaryList";
 
 const Home = () => {
   return (
