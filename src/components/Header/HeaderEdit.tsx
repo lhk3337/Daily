@@ -11,7 +11,7 @@ const HeaderEdit = ({ Navi, location }: any) => {
           onClick={() => {
             Navi(-1);
           }}
-          className="px-5 py-2.5 bg-[#ececec] rounded whitespace-nowrap"
+          className="grayBtn"
         >
           &lt; 뒤로가기
         </button>

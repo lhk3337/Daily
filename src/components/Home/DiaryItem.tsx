@@ -28,7 +28,7 @@ const DiaryItem = ({ emotion, content, date, id }: Iprops) => {
         <h1 className="text-[18px]">{content}</h1>
       </div>
       <div>
-        <button className="backBtn" onClick={() => navi(`/edit/${id}`)}>
+        <button className="grayBtn" onClick={() => navi(`/edit/${id}`)}>
           수정하기
         </button>
       </div>

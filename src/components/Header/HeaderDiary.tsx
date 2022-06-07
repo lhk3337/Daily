@@ -12,7 +12,7 @@ const HeaderDiary = ({ Navi, pathInfo }: any) => {
           onClick={() => {
             Navi(-1);
           }}
-          className="px-5 py-2.5 bg-[#ececec] rounded whitespace-nowrap"
+          className="grayBtn"
         >
           &lt; 뒤로가기
         </button>
@@ -23,7 +23,7 @@ const HeaderDiary = ({ Navi, pathInfo }: any) => {
           onClick={() => {
             Navi(`/edit/${id}`);
           }}
-          className="px-5 py-2.5 bg-[#ececec] rounded whitespace-nowrap"
+          className="grayBtn"
         >
           수정하기
         </button>
