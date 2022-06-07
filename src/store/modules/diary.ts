@@ -8,15 +8,15 @@ const dummyData = [
   { id: 1, content: "오늘의 일기 1번", emotion: 5, date: 1651656764897 },
   { id: 2, content: "오늘의 일기 2번", emotion: 1, date: 1652656786274 },
   { id: 3, content: "오늘의 일기 3번", emotion: 4, date: 1652756799088 },
-  { id: 4, content: "오늘의 일기 4번", emotion: 2, date: 1652856810527 },
+  { id: 4, content: "오늘의 일기 4번", emotion: 2, date: 1653956810527 },
   { id: 5, content: "오늘의 일기 5번", emotion: 3, date: 1654242133171 },
 ];
 
 interface IdummyDataData {
   id: number;
-  date: number;
-  content: string;
-  emotion: number;
+  date?: number;
+  content?: string;
+  emotion?: number;
 }
 
 interface IdummyDataDatas extends Array<IdummyDataData> {}
@@ -24,14 +24,14 @@ interface IdummyDataDatas extends Array<IdummyDataData> {}
 interface actionType {
   type: string;
   data: { id: number; date: number; content: string; emotion: number };
-  targetId?: string;
+  targetId?: number;
   date?: Date;
 }
 
 // 액션 생성 함수
 export const init = () => ({ type: INIT, data: dummyData });
 
-export const edit = (targetId: string, date: Date, content: string, emotion: number) => ({
+export const edit = (targetId: number, date: Date, content: string, emotion: number) => ({
   type: EDIT,
   data: { id: targetId, date: new Date(date).getTime(), content, emotion },
 });
@@ -59,11 +59,11 @@ export default function Diary(state: IdummyDataDatas = dummyData, action: action
       break;
     }
     case REMOVE: {
-      newState = state.filter((it: any) => it.id !== action.targetId);
+      newState = state.filter((it: IdummyDataData) => it.id !== action.targetId);
       break;
     }
     case EDIT: {
-      newState = state.map((it: any) => (it.id === action.data.id ? { ...action.date } : it));
+      newState = state.map((it: IdummyDataData) => (it.id === action.data.id ? { ...action.date } : it));
       break;
     }
     default:

@@ -1,6 +1,12 @@
 import React from "react";
+import { PathMatch } from "react-router-dom";
 
-const HeaderDiary = ({ Navi, pathInfo }: any) => {
+interface Iprops {
+  Navi: any;
+  pathInfo: PathMatch<string>;
+}
+
+const HeaderDiary = ({ Navi, pathInfo }: Iprops) => {
   const {
     params: { id },
   } = pathInfo;

@@ -5,13 +5,16 @@ import HeaderHome from "./HeaderHome";
 import HeaderNew from "./HeaderNew";
 import HeaderDiary from "./HeaderDiary";
 import HeaderEdit from "./HeaderEdit";
+interface IMonthDateType {
+  time: Date;
+}
 
 const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigation = useNavigate();
 
-  const monthDate = useSelector(({ time }: any) => time);
+  const monthDate = useSelector(({ time }: IMonthDateType) => time);
 
   const editPath = matchPath<string, string>("/edit/:id", location.pathname);
   const diaryPath = matchPath<string, string>("/diary/:id", location.pathname);
