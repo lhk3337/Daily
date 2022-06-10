@@ -1,7 +1,12 @@
 import React from "react";
+import NewItem from "components/New/NewItem";
 
 const New = () => {
-  return <div>New</div>;
+  return (
+    <>
+      <NewItem />
+    </>
+  );
 };
 
 export default New;
