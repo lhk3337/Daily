@@ -12,14 +12,12 @@ const dummyData = [
   { id: 15, content: "오늘의 일기 5번", emotion: 3, date: 1654242133171 },
 ];
 
-interface IdummyDataData {
+export interface elementDataType {
   id: number;
-  date?: number;
   content?: string;
   emotion?: number;
+  date: number;
 }
-
-interface IdummyDataDatas extends Array<IdummyDataData> {}
 
 interface actionType {
   type: string;
@@ -29,7 +27,7 @@ interface actionType {
 }
 
 // 액션 생성 함수
-export const init = () => ({ type: INIT, data: dummyData });
+let id = 1;
 
 export const edit = (targetId: number, date: Date, content: string, emotion: number) => ({
   type: EDIT,
@@ -37,30 +35,26 @@ export const edit = (targetId: number, date: Date, content: string, emotion: num
 });
 
 export const remove = (targetId: string) => ({ type: REMOVE, targetId: targetId });
-
-export const create = (date: string, content: string, emotion: number, dataId: any): actionType => {
+export const create = (date: string, content: string, emotion: number): actionType => {
   return {
     type: CREATE,
-    data: { id: dataId, date: new Date(date).getTime(), content: content, emotion: emotion },
+    data: { id: id++, content: content, emotion: emotion, date: new Date(date).getTime() },
   };
 };
 
-export default function Diary(state: IdummyDataDatas = dummyData, action: actionType) {
+export default function Diary(state: elementDataType[] = dummyData, action: actionType): any {
   let newState = [];
   switch (action.type) {
-    case INIT: {
-      return action.data;
-    }
     case CREATE: {
       newState = [action.data, ...state];
       break;
     }
     case REMOVE: {
-      newState = state.filter((it: IdummyDataData) => it.id !== action.targetId);
+      newState = state.filter((it: elementDataType) => it.id !== action.targetId);
       break;
     }
     case EDIT: {
-      newState = state.map((it: IdummyDataData) => (it.id === action.data.id ? { ...action.date } : it));
+      newState = state.map((it: elementDataType) => (it.id === action.data.id ? { ...action.date } : it));
       break;
     }
     default:

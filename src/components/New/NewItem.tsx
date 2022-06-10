@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { create } from "store/modules/diary";
 import { emotionList } from "util/emotion";
 import { RootState } from "store/modules";
-import { useLocation, useNavigate, matchPath } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import EmotionItem from "components/New/EmotionItem";
-import { useEffect } from "react";
 
 const getStringDate = (date: Date) => {
   return date.toISOString().slice(0, 10);
@@ -15,16 +14,12 @@ const NewItem = () => {
   const [date, setDate] = useState(getStringDate(new Date()));
   const [emotion, setEmotion] = useState<number>(3);
   const [content, setContent] = useState<string>("");
-  const [id, setId] = useState<number>(0);
+
   const contentRef = useRef() as React.MutableRefObject<HTMLTextAreaElement>;
-  const dataId = useRef(0);
 
   const navigation = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setId((prev) => prev + 1);
-  }, []);
   const handleClickEmote = (emotion: any) => {
     setEmotion(emotion);
   };
@@ -36,12 +31,10 @@ const NewItem = () => {
       contentRef.current.focus();
       return;
     }
-    // dispatch(create({ date, content, emotion, dataId: dataId.current + 1 }));
 
-    dispatch(create(date, content, emotion, id));
+    dispatch(create(date, content, emotion));
     navigation("/", { replace: true });
   };
-  // console.log(content);
 
   return (
     <>
@@ -54,7 +47,6 @@ const NewItem = () => {
           className="text-[20px] py-1.5 px-5 bg-[#ececec] rounded"
         />
       </div>
-      {/* {console.log(new Date(date).getTime())} */}
       <div className="mb-[40px]">
         <h1 className="h1text">오늘의 감정</h1>
         <div className="grid grid-cols-5 gap-[2%]">
