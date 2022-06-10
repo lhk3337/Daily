@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store/modules";
+import { elementDataType } from "store/modules/diary";
 import DiaryItem from "./DiaryItem";
-const sortOptionList = [
-  { value: "latest", name: "최신순" },
-  { value: "oldest", name: "오래된 순" },
-];
 
-const filterOptionList = [
-  { value: "all", name: "전부다" },
-  { value: "good", name: "좋은 감정만" },
-  { value: "bad", name: "안좋은 감정만" },
-];
+import { sortOptionList, filterOptionList } from "util/optionList";
 
 const ControlMenu = ({ value, onChange, optionList }: any) => {
   return (
@@ -32,24 +25,17 @@ const ControlMenu = ({ value, onChange, optionList }: any) => {
 
 const DiaryList = () => {
   const navi = useNavigate();
+
   const state: [] = useSelector(({ diary }: RootState) => diary);
   const times = useSelector(({ time }: RootState) => time);
 
-  const [data, setData] = useState<IData[]>([]); // 내림차순으로 data 정렬
-
+  const [data, setData] = useState<elementDataType[]>([]); // 내림차순으로 data 정렬
   const [sortType, setSortType] = useState("latest");
   const [filter, setFilter] = useState("all");
 
-  interface IData {
-    id: number;
-    content: string;
-    emotion: number;
-    date: number;
-  }
-
   const originData = () => {
     const dateMonthFilter = state.filter(
-      (item: IData) => new Date(item.date).getMonth() === new Date(times).getMonth()
+      (item: elementDataType) => new Date(item.date).getMonth() === new Date(times).getMonth()
     );
     const init = dateMonthFilter.sort((a: any, b: any) => b.date - a.date);
     return init;
