@@ -1,7 +1,37 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { RootState } from "store/modules";
+import { elementDataType } from "store/modules/diary";
+
+import { emotionList } from "util/emotion";
 
 const Diary = () => {
-  return <div>Diary</div>;
+  const diaryData = useSelector(({ diary }: RootState) => diary);
+  const { id } = useParams();
+
+  const userData = diaryData?.filter((it: elementDataType) => it.id === Number(id));
+  const { content, emotion } = userData[0];
+  const emotionApi = emotionList.filter((value) => value.id === emotion);
+  const { imgUrl, title, bgColor } = emotionApi[0];
+
+  return (
+    <div>
+      <div className="flex flex-col justify-center items-center mb-[100px]">
+        <h1 className="h1text">오늘의 감정</h1>
+        <div className={`w-[250px] h-[250px] ${bgColor} flex flex-col rounded-[5px] items-center justify-around`}>
+          <img src={imgUrl} alt={`emotion${emotion}`} />
+          <div className="text-[25px] text-white">{title}</div>
+        </div>
+      </div>
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="h1text">오늘의 일기</h1>
+        <div className="w-full bg-[#ececec] rounded-[5px]">
+          <p className="p-[20px] leading-[2.5] text-[20px] font-normal my-[20px] font-['Yeon_Sung']">{content}</p>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Diary;
