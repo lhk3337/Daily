@@ -4,16 +4,19 @@ import { useParams } from "react-router-dom";
 import { RootState } from "store/modules";
 import { elementDataType } from "store/modules/diary";
 
-import { emotionList } from "util/emotion";
+import { emotionList, emotionType } from "util/emotion";
 
 const Diary = () => {
   const diaryData = useSelector(({ diary }: RootState) => diary);
   const { id } = useParams();
 
-  const userData = diaryData?.filter((it: elementDataType) => it.id === Number(id));
-  const { content, emotion } = userData[0];
-  const emotionApi = emotionList.filter((value) => value.id === emotion);
-  const { imgUrl, title, bgColor } = emotionApi[0];
+  const userData = diaryData?.find((it: elementDataType) => it.id === Number(id));
+  const { content, emotion } = userData;
+  const emotionApi = emotionList.find((value: emotionType) => value.emotionid === emotion);
+
+  const imgUrl = emotionApi?.imgUrl;
+  const bgColor = emotionApi?.bgColor;
+  const title = emotionApi?.title;
 
   return (
     <div>
