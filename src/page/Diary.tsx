@@ -12,7 +12,7 @@ const Diary = () => {
 
   const userData = diaryData?.find((it: elementDataType) => it.id === Number(id));
   const { content, emotion } = userData;
-  const emotionApi = emotionList.find((value: emotionType) => value.emotionid === emotion);
+  const emotionApi = emotionList.find((value: emotionType) => value.emotionId === emotion);
 
   const imgUrl = emotionApi?.imgUrl;
   const bgColor = emotionApi?.bgColor;

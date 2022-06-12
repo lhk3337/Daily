@@ -51,7 +51,7 @@ const NewItem = () => {
         <h1 className="h1text">오늘의 감정</h1>
         <div className="grid grid-cols-5 gap-[2%]">
           {emotionList.map((value, i) => (
-            <EmotionItem key={i} {...value} onClick={handleClickEmote} isSelected={value.id === emotion} />
+            <EmotionItem key={i} {...value} onClick={handleClickEmote} isSelected={value.emotionId === emotion} />
             //  emotionList의 여러 요소들(객체)을 EmotionComponent props로 넘겨줄때 {...value}로 사용함.
           ))}
         </div>
