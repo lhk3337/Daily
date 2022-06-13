@@ -13,9 +13,10 @@ const HeaderDiary = ({ Navi, pathInfo }: Iprops) => {
     params: { id },
   } = pathInfo;
   const diary = useSelector(({ diary }: RootState) => diary);
+  const userData = diary?.find((it: elementDataType) => it.id === Number(id));
+  if (!userData) return <></>;
 
-  const userData = diary?.filter((it: elementDataType) => it.id === Number(id));
-  const { date } = userData[0];
+  const { date } = userData;
   const offset = new Date().getTimezoneOffset() * 60000;
 
   return (

@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { RootState } from "store/modules";
 import { elementDataType } from "store/modules/diary";
 
 import { emotionList, emotionType } from "util/emotion";
 
 const Diary = () => {
+  const navigate = useNavigate();
   const diaryData = useSelector(({ diary }: RootState) => diary);
   const { id } = useParams();
 
-  const userData = diaryData?.find((it: elementDataType) => it.id === Number(id));
-  const { content, emotion } = userData;
+  const userData = diaryData.find((it: elementDataType) => it.id === Number(id));
+  useEffect(() => {
+    if (!userData) {
+      navigate("/", { replace: true });
+    }
+  }, [navigate, userData]);
+
+  const content = userData?.content;
+  const emotion = userData?.emotion;
+
   const emotionApi = emotionList.find((value: emotionType) => value.emotionId === emotion);
 
   const imgUrl = emotionApi?.imgUrl;
