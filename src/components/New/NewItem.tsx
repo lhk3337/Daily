@@ -20,7 +20,7 @@ const NewItem = () => {
   const navigation = useNavigate();
   const dispatch = useDispatch();
 
-  const handleClickEmote = (emotion: any) => {
+  const handleClickEmote = (emotion: number) => {
     setEmotion(emotion);
   };
   const monthDate = useSelector(({ time }: RootState) => time);
