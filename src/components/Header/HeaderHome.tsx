@@ -1,6 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "store/modules";
 import { plus, minus } from "store/modules/time";
-const HeaderHome = ({ dispatch, timedata }: any) => {
+const HeaderHome = ({ dispatch }: any) => {
+  const timedata = useSelector(({ time }: RootState) => time);
+  if (!timedata) return <></>;
+
   return (
     <>
       <div className="w-3/12 justify-start flex">
