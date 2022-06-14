@@ -1,9 +1,15 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { remove } from "store/modules/diary";
 const HeaderEdit = ({ Navi, location }: any) => {
-  const { id } = useParams();
-  console.log(id);
-  console.log(location);
+  const dispatch = useDispatch();
+
+  const id = location.pathname.match(/\d+/g)[0]; // /edit/12에서 숫자만 추출하도록 정규식 표현 사용
+
+  const onClickDel = () => {
+    dispatch(remove(parseInt(id)));
+  };
+
   return (
     <>
       <div className="w-3/12 justify-start flex">
@@ -18,7 +24,9 @@ const HeaderEdit = ({ Navi, location }: any) => {
       </div>
       <h1 className="w-1/2 text-2xl justify-center font-bold flex">일기 수정하기</h1>
       <div className="w-3/12 justify-end flex">
-        <button className="px-5 py-2.5 bg-[#fd565f] rounded whitespace-nowrap text-white">삭제하기</button>
+        <button className="px-5 py-2.5 bg-[#fd565f] rounded whitespace-nowrap text-white" onClick={onClickDel}>
+          삭제하기
+        </button>
       </div>
     </>
   );
