@@ -1,13 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { remove } from "store/modules/diary";
 const HeaderEdit = ({ Navi, location }: any) => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const id = location.pathname.match(/\d+/g)[0]; // /edit/12에서 숫자만 추출하도록 정규식 표현 사용
 
   const onClickDel = () => {
     dispatch(remove(parseInt(id)));
+    navigate("/", { replace: true });
   };
 
   return (
