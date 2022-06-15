@@ -26,21 +26,27 @@ interface actionType {
   date?: Date;
 }
 
-// 액션 생성 함수
+// 액션 생성 함수 ====================================================================================================
 let id = 1;
 
-export const edit = (targetId: number, date: Date, content: string, emotion: number) => ({
-  type: EDIT,
-  data: { id: targetId, date: new Date(date).getTime(), content, emotion },
-});
+export const edit = (targetId: number, date: string, content: string, emotion: number) => {
+  // console.log(date, targetId, content, emotion);
+  return {
+    type: EDIT,
+    data: { id: targetId, content: content, emotion: emotion, date: new Date(date).getTime() },
+  };
+};
 
-export const remove = (targetId: string) => ({ type: REMOVE, targetId: targetId });
-export const create = (date: string, content: string, emotion: number): actionType => {
+export const remove = (targetId: number) => ({ type: REMOVE, targetId: targetId });
+
+export const create = (date: string, content: string, emotion: number) => {
   return {
     type: CREATE,
     data: { id: id++, content: content, emotion: emotion, date: new Date(date).getTime() },
   };
 };
+
+// ================================================================================================================
 
 export default function Diary(state: elementDataType[] = dummyData, action: actionType): any {
   let newState = [];
@@ -50,11 +56,11 @@ export default function Diary(state: elementDataType[] = dummyData, action: acti
       break;
     }
     case REMOVE: {
-      newState = state.filter((it: elementDataType) => it.id !== action.targetId);
+      newState = state.filter((it) => it.id !== action.targetId);
       break;
     }
     case EDIT: {
-      newState = state.map((it: elementDataType) => (it.id === action.data.id ? { ...action.date } : it));
+      newState = state.map((it) => (it.id === action.data.id ? { ...action.data } : it));
       break;
     }
     default:
