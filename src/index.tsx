@@ -5,6 +5,9 @@ import App from "./App";
 
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "store/modules";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+
 import { Provider } from "react-redux";
 
 const store = configureStore({
@@ -12,11 +15,14 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
   devTools: process.env.NODE_ENV !== "production",
 });
+const persistor = persistStore(store);
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

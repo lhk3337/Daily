@@ -18,7 +18,6 @@ interface actionType {
 }
 
 // 액션 생성 함수 ====================================================================================================
-let id = 1;
 
 export const edit = (targetId: number, date: string, content: string, emotion: number) => {
   // console.log(date, targetId, content, emotion);
@@ -33,7 +32,7 @@ export const remove = (targetId: number) => ({ type: REMOVE, targetId: targetId 
 export const create = (date: string, content: string, emotion: number) => {
   return {
     type: CREATE,
-    data: { id: id++, content: content, emotion: emotion, date: new Date(date).getTime() },
+    data: { id: new Date().getTime(), content: content, emotion: emotion, date: new Date(date).getTime() },
   };
 };
 
