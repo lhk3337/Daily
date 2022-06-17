@@ -35,7 +35,9 @@ const DiaryList = () => {
 
   const originData = () => {
     const dateMonthFilter = state.filter(
-      (item: elementDataType) => new Date(item.date).getMonth() === new Date(times).getMonth()
+      (item: elementDataType) =>
+        new Date(item.date).getMonth() === new Date(times).getMonth() &&
+        new Date(item.date).getFullYear() === new Date(times).getFullYear()
     );
     const init = dateMonthFilter.sort((a: any, b: any) => b.date - a.date);
     return init;
