@@ -7,10 +7,7 @@ import { useParams } from "react-router-dom";
 import { RootState } from "store/modules";
 import { elementDataType } from "store/modules/diary";
 import EmotionItem from "components/New/EmotionItem";
-
-const getStringDate = (date: Date) => {
-  return date.toISOString().slice(0, 10);
-};
+import { getStringDate } from "util/getDate";
 
 const Edit = () => {
   const { id } = useParams();
@@ -47,8 +44,10 @@ const Edit = () => {
       contentRef.current.focus();
       return;
     }
-    dispatch(edit(targetId, date, content, emotion));
-    navigation("/", { replace: true });
+    if (window.confirm("수정 하시겠습니까?")) {
+      dispatch(edit(targetId, date, content, emotion));
+      navigation("/", { replace: true });
+    }
   };
 
   return (

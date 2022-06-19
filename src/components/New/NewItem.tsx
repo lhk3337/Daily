@@ -1,14 +1,10 @@
 import React, { useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { create } from "store/modules/diary";
 import { emotionList } from "util/emotion";
-import { RootState } from "store/modules";
 import { useNavigate } from "react-router-dom";
 import EmotionItem from "components/New/EmotionItem";
-
-const getStringDate = (date: Date) => {
-  return date.toISOString().slice(0, 10);
-};
+import { getStringDate } from "util/getDate";
 
 const NewItem = () => {
   const [date, setDate] = useState(getStringDate(new Date()));
@@ -23,17 +19,16 @@ const NewItem = () => {
   const handleClickEmote = (emotion: number) => {
     setEmotion(emotion);
   };
-  const monthDate = useSelector(({ time }: RootState) => time);
-  const diary = useSelector(({ diary }: RootState) => diary);
 
   const onClickSubmit = () => {
     if (content.length < 1) {
       contentRef.current.focus();
       return;
     }
-
-    dispatch(create(date, content, emotion));
-    navigation("/", { replace: true });
+    if (window.confirm("새로운 일기를 작성하시겠습니까?")) {
+      dispatch(create(date, content, emotion));
+      navigation("/", { replace: true });
+    }
   };
 
   return (
