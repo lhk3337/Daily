@@ -10,7 +10,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigation = useNavigate();
-
   const editPath = matchPath<string, string>("/edit/:id", location.pathname);
   const diaryPath = matchPath<string, string>("/diary/:id", location.pathname);
 

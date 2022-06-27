@@ -1,14 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { PathMatch } from "react-router-dom";
 import { RootState } from "store/modules";
-import { elementDataType } from "store/modules/diary";
-interface Iprops {
-  Navi: any;
-  pathInfo: PathMatch<string>;
-}
+import { elementDataType } from "store/types";
+import { IHeaderDiaryProps } from "types/type";
 
-const HeaderDiary = ({ Navi, pathInfo }: Iprops) => {
+const HeaderDiary = ({ Navi, pathInfo }: IHeaderDiaryProps) => {
   const {
     params: { id },
   } = pathInfo;

@@ -1,21 +1,22 @@
+import { actionType, elementDataType } from "store/types";
 const INIT = "INIT";
 const CREATE = "CREATE";
 const REMOVE = "REMOVE";
 const EDIT = "EDIT";
 
-export interface elementDataType {
-  id: number;
-  content?: string;
-  emotion?: number;
-  date: number;
-}
+// export interface elementDataType {
+//   id: number;
+//   content?: string;
+//   emotion?: number;
+//   date: number;
+// }
 
-interface actionType {
-  type: string;
-  data: { id: number; date: number; content: string; emotion: number };
-  targetId?: number;
-  date?: Date;
-}
+// interface actionType {
+//   type: string;
+//   data: { id: number; date: number; content: string; emotion: number };
+//   targetId?: number;
+//   date?: Date;
+// }
 
 // 액션 생성 함수 ====================================================================================================
 

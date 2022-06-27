@@ -2,7 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "store/modules";
 import { plus, minus } from "store/modules/time";
-const HeaderHome = ({ dispatch }: any) => {
+import { Idispatch } from "types/type";
+
+const HeaderHome = ({ dispatch }: Idispatch) => {
   const timedata = useSelector(({ time }: RootState) => time);
   if (!timedata) return <></>;
 

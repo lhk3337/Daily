@@ -1,10 +1,9 @@
+import { timeAction } from "store/types";
 const PLUS = "PLUS" as const;
 const MINUS = "MINUS" as const;
 
 export const plus = () => ({ type: PLUS });
 export const minus = () => ({ type: MINUS });
-
-type timeAction = ReturnType<typeof plus> | ReturnType<typeof minus>;
 
 export default function Diary(state: Date = new Date(), action: timeAction) {
   switch (action.type) {

@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store/modules";
-import { elementDataType } from "store/modules/diary";
+import { elementDataType } from "store/types";
 import DiaryItem from "./DiaryItem";
-
+import { IoptionList, IControlType, IsortedList } from "types/type";
 import { sortOptionList, filterOptionList } from "util/optionList";
 
-const ControlMenu = ({ value, onChange, optionList }: any) => {
+const ControlMenu = ({ value, onChange, optionList }: IControlType) => {
   return (
     <select
       className="bg-[#ececec] px-5 py-2.5 rounded text-lg mr-3 leading-none h-auto"
       value={value}
       onChange={(e) => onChange(e.currentTarget.value)}
     >
-      {optionList.map((it: any, idx: number) => (
+      {optionList.map((it: IoptionList, idx: number) => (
         <option key={idx} value={it.value}>
           {it.name}
         </option>
@@ -39,7 +39,7 @@ const DiaryList = () => {
         new Date(item.date).getMonth() === new Date(times).getMonth() &&
         new Date(item.date).getFullYear() === new Date(times).getFullYear()
     );
-    const init = dateMonthFilter.sort((a: any, b: any) => b.date - a.date);
+    const init = dateMonthFilter.sort((a: IsortedList, b: IsortedList) => b.date - a.date);
     return init;
   };
 
@@ -49,23 +49,23 @@ const DiaryList = () => {
   }, [times]);
 
   const getProcessedDiaryList = () => {
-    const filterCallBack = (item: any) => {
+    const filterCallBack = (item: IsortedList) => {
       if (filter === "good") {
-        return parseInt(item.emotion) <= 3;
+        return item.emotion <= 3;
       } else {
-        return parseInt(item.emotion) > 3;
+        return item.emotion > 3;
       }
     };
 
-    const compare = (a: any, b: any) => {
+    const compare = (a: IsortedList, b: IsortedList) => {
       if (sortType === "latest") {
-        return parseInt(b.date) - parseInt(a.date);
+        return b.date - a.date;
       } else {
-        return parseInt(a.date) - parseInt(b.date);
+        return a.date - b.date;
       }
     };
     const copyList = JSON.parse(JSON.stringify(data));
-    const filteredList = filter === "all" ? copyList : copyList.filter((it: any) => filterCallBack(it));
+    const filteredList = filter === "all" ? copyList : copyList.filter((it: IsortedList) => filterCallBack(it));
     const sortedList = filteredList.sort(compare);
     return sortedList;
   };
@@ -86,7 +86,7 @@ const DiaryList = () => {
           </button>
         </div>
       </div>
-      {getProcessedDiaryList().map((item: any) => (
+      {getProcessedDiaryList().map((item: IsortedList) => (
         <DiaryItem key={item.id} {...item} />
       ))}
     </>

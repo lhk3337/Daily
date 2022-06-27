@@ -10,6 +10,8 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import { Provider } from "react-redux";
 
+export type AppDispatch = typeof store.dispatch;
+
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),

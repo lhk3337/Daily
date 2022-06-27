@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { edit } from "store/modules/diary";
 import { useParams } from "react-router-dom";
 import { RootState } from "store/modules";
-import { elementDataType } from "store/modules/diary";
+import { elementDataType } from "store/types";
 import EmotionItem from "components/New/EmotionItem";
 import { getStringDate } from "util/getDate";
 
@@ -35,7 +35,7 @@ const Edit = () => {
       }
     }
   }, [id, diaryData]);
-  const handleClickEmote = (emotion: any) => {
+  const handleClickEmote = (emotion: number) => {
     setEmotion(emotion);
   };
 

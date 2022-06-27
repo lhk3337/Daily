@@ -1,12 +1,6 @@
 import React from "react";
-interface emotionType {
-  emotionId: any;
-  title: string;
-  imgUrl: string;
-  bgColor: string;
-  onClick: any;
-  isSelected: boolean;
-}
+import { emotionType } from "types/type";
+
 const EmotionItem = ({ title, imgUrl, bgColor, onClick, emotionId, isSelected }: emotionType) => {
   return (
     <div

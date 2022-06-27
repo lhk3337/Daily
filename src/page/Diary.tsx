@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { RootState } from "store/modules";
-import { elementDataType } from "store/modules/diary";
+import { elementDataType } from "store/types";
 
 import { emotionList, emotionType } from "util/emotion";
 
