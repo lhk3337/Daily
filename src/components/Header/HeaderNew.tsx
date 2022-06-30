@@ -1,7 +1,6 @@
 import React from "react";
-import { useLocation, useNavigate, matchPath } from "react-router-dom";
-
-const HeaderNew = ({ Navi }: any) => {
+import { INavi } from "types/type";
+const HeaderNew = ({ Navi }: INavi) => {
   return (
     <>
       <div className="w-3/12 justify-start flex">

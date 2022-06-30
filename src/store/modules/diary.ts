@@ -39,7 +39,7 @@ export const create = (date: string, content: string, emotion: number) => {
 
 // ================================================================================================================
 
-export default function Diary(state: elementDataType[] = [], action: actionType): any {
+export default function Diary(state: elementDataType[] = [], action: actionType): elementDataType[] {
   let newState = [];
   switch (action.type) {
     case CREATE: {
@@ -57,6 +57,6 @@ export default function Diary(state: elementDataType[] = [], action: actionType)
     default:
       return state;
   }
-
+  console.log(newState);
   return newState;
 }

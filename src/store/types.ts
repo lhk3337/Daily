@@ -4,8 +4,8 @@ export type timeAction = ReturnType<typeof plus> | ReturnType<typeof minus>;
 
 export interface elementDataType {
   id: number;
-  content?: string;
-  emotion?: number;
+  content: string;
+  emotion: number;
   date: number;
 }
 

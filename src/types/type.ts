@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { PathMatch } from "react-router-dom";
+import { PathMatch, NavigateFunction, Path } from "react-router-dom";
 import { AppDispatch } from "index";
 
 export interface IoptionList {
@@ -32,7 +32,13 @@ export interface Idispatch {
   dispatch: AppDispatch;
 }
 
-export interface IHeaderDiaryProps {
-  Navi: any;
+export interface INavi {
+  Navi: NavigateFunction;
+}
+
+export interface IHeaderDiaryProps extends INavi {
   pathInfo: PathMatch<string>;
+}
+export interface IHeaderEditProps extends INavi {
+  location: Path;
 }

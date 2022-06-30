@@ -2,15 +2,16 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { remove } from "store/modules/diary";
+import { IHeaderEditProps } from "types/type";
 
-const HeaderEdit = ({ Navi, location }: any) => {
+const HeaderEdit = ({ Navi, location }: IHeaderEditProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const id = location.pathname.match(/\d+/g)[0]; // /edit/12에서 숫자만 추출하도록 정규식 표현 사용
+  const id = location.pathname;
 
   const onClickDel = () => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
-      dispatch(remove(parseInt(id)));
+      dispatch(remove(parseInt(id.slice(6))));
       navigate("/", { replace: true });
     }
   };

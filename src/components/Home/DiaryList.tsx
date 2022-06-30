@@ -26,7 +26,7 @@ const ControlMenu = ({ value, onChange, optionList }: IControlType) => {
 const DiaryList = () => {
   const navi = useNavigate();
 
-  const state: [] = useSelector(({ diary }: RootState) => diary);
+  const state = useSelector(({ diary }: RootState) => diary);
   const times = useSelector(({ time }: RootState) => time);
 
   const [data, setData] = useState<elementDataType[]>([]); // 내림차순으로 data 정렬
