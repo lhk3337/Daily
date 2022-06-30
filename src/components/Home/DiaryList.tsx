@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "store/modules";
 import { elementDataType } from "store/types";
 import DiaryItem from "./DiaryItem";

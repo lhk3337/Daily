@@ -1,5 +1,4 @@
 import { actionType, elementDataType } from "store/types";
-const INIT = "INIT";
 const CREATE = "CREATE";
 const REMOVE = "REMOVE";
 const EDIT = "EDIT";
