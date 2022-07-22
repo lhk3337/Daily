@@ -1,6 +1,6 @@
-import { plus, minus } from "store/modules/time";
+// import { plus, minus } from "store/modules/time";
 
-export type timeAction = ReturnType<typeof plus> | ReturnType<typeof minus>;
+// export type timeAction = ReturnType<typeof plus> | ReturnType<typeof minus>;
 
 export interface elementDataType {
   id: number;
